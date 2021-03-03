@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace SSM
 {
@@ -10,7 +12,9 @@ namespace SSM
         void SetState(IState state);
         void Tick();
     }
-    public class FiniteStateMachine : IStateMachine
+
+
+    public class FSM : IStateMachine
     {
 
         protected IState _currentState;
@@ -18,6 +22,25 @@ namespace SSM
         public IState To(IState from, IState to) { from.To(to); return to; }
 
         public IState To(IState from, IState to, Func<bool> condition) { from.To(to, condition); return to; }
+
+        public int BatchAddState(Dictionary<FiniteState, Func<bool>> batchsData)
+        {
+            int counter = 0;
+            //           b's condition        a's condition
+            //eg:    a---------------->b---------------->a
+            foreach (FiniteState a in batchsData.Keys)
+            {
+                foreach (KeyValuePair<FiniteState, Func<bool>> conditionBatchse in batchsData)
+                {
+                    var b = conditionBatchse.Key;
+                    if (a.Equals(b)) break;
+
+                    a.To(b, conditionBatchse.Value);
+                    counter++;
+                }
+            }
+            return counter;
+        }
 
         public void SetState(IState state)
         {
@@ -33,7 +56,7 @@ namespace SSM
             if (to != null) SetState(to);
         }
     }
-    public class HierarchicalFiniteStateMachine : FiniteStateMachine
+    public class HFSM : FSM
     {
         public override void Tick()
         {

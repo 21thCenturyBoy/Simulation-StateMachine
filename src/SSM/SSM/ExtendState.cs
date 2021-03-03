@@ -13,7 +13,7 @@ namespace SSM
             Time = time;
         }
     }
-    public class TimerTaskFiniteState : FiniteState
+    public class TimerTaskFS : FiniteState
     {
         private float _time = 0;
         private float _timer = 0;
@@ -23,14 +23,14 @@ namespace SSM
         private Func<float> onUpdateTime;
         private Action _task;
 
-        public TimerTaskFiniteState(TimeChunk timeChunk, Action task, Action onTick) : this(task.Method.Name, timeChunk, task, null, onTick, null) { }
-        public TimerTaskFiniteState(TimeChunk timeChunk, Action task, Action onEnter, Action onExit) : this(task.Method.Name, timeChunk, task, onEnter, null, onExit) { }
-        public TimerTaskFiniteState(TimeChunk timeChunk, Action task, Action onEnter, Action onTick, Action onExit) : this(task.Method.Name, timeChunk, task, onEnter, onTick, onExit) { }
-        public TimerTaskFiniteState(TimeChunk timeChunk, Action task, Action onEnter, Action onTick, Action onExit, int count = 0) : this(task.Method.Name, timeChunk, task, onEnter, onTick, onExit, count) { }
-        public TimerTaskFiniteState(string name, TimeChunk timeChunk, Action task, Action onTick) : this(name, timeChunk, task, null, onTick, null) { }
-        public TimerTaskFiniteState(string name, TimeChunk timeChunk, Action task, Action onEnter, Action onExit) : this(name, timeChunk, task, onEnter, null, onExit) { }
-        public TimerTaskFiniteState(string name, TimeChunk timeChunk, Action task, Action onEnter, Action onTick, Action onExit) : this(name, timeChunk, task, onEnter, onTick, onExit, 0) { }
-        public TimerTaskFiniteState(string name, TimeChunk timeChunk, Action task, Action onEnter, Action onTick, Action onExit, int count = 0)
+        public TimerTaskFS(TimeChunk timeChunk, Action task, Action onTick) : this(task.Method.Name, timeChunk, task, null, onTick, null) { }
+        public TimerTaskFS(TimeChunk timeChunk, Action task, Action onEnter, Action onExit) : this(task.Method.Name, timeChunk, task, onEnter, null, onExit) { }
+        public TimerTaskFS(TimeChunk timeChunk, Action task, Action onEnter, Action onTick, Action onExit) : this(task.Method.Name, timeChunk, task, onEnter, onTick, onExit) { }
+        public TimerTaskFS(TimeChunk timeChunk, Action task, Action onEnter, Action onTick, Action onExit, int count = 0) : this(task.Method.Name, timeChunk, task, onEnter, onTick, onExit, count) { }
+        public TimerTaskFS(string name, TimeChunk timeChunk, Action task, Action onTick) : this(name, timeChunk, task, null, onTick, null) { }
+        public TimerTaskFS(string name, TimeChunk timeChunk, Action task, Action onEnter, Action onExit) : this(name, timeChunk, task, onEnter, null, onExit) { }
+        public TimerTaskFS(string name, TimeChunk timeChunk, Action task, Action onEnter, Action onTick, Action onExit) : this(name, timeChunk, task, onEnter, onTick, onExit, 0) { }
+        public TimerTaskFS(string name, TimeChunk timeChunk, Action task, Action onEnter, Action onTick, Action onExit, int count = 0)
         {
             Name = name;
             _time = timeChunk.Time;
@@ -69,15 +69,15 @@ namespace SSM
         public bool Finished() => _counter == 0 && !_loopflag;
     }
 
-    public class TimerFiniteState : FiniteState
+    public class TimerFS : FiniteState
     {
         private float _time = 0;
         private float _timer = 0;
         private Func<float> onUpdateTime;
-        public TimerFiniteState(string name, TimeChunk timeChunk) : this(name, timeChunk, null) { }
-        public TimerFiniteState(string name, TimeChunk timeChunk, Action onTick) : this(name, timeChunk, null, onTick, null) { }
-        public TimerFiniteState(string name, TimeChunk timeChunk, Action onEnter, Action onExit) : this(name, timeChunk, onEnter, null, onExit) { }
-        public TimerFiniteState(string name, TimeChunk timeChunk, Action onEnter, Action onTick, Action onExit)
+        public TimerFS(string name, TimeChunk timeChunk) : this(name, timeChunk, null) { }
+        public TimerFS(string name, TimeChunk timeChunk, Action onTick) : this(name, timeChunk, null, onTick, null) { }
+        public TimerFS(string name, TimeChunk timeChunk, Action onEnter, Action onExit) : this(name, timeChunk, onEnter, null, onExit) { }
+        public TimerFS(string name, TimeChunk timeChunk, Action onEnter, Action onTick, Action onExit)
         {
             _time = timeChunk.Time;
             Name = name;

@@ -12,14 +12,13 @@ namespace SSM
 
         IState To(IState to);
         IState To(IState to, params Func<bool>[] conditions);
-
-        //IState GetFinalEntryState();
+        IState OrTo(IState to, params Func<bool>[] conditions);
         IState GetTransitionState();
 
     }
 
 
-    public class FiniteState : IState
+    public class FiniteState : IState, IEquatable<FiniteState>
     {
         protected Action onEnter;
         protected Action onTick;
@@ -40,22 +39,45 @@ namespace SSM
         public void Tick() { onTick?.Invoke(); }
         public void Exit() { onExit?.Invoke(); }
 
-        public IState To(IState to) => To(to, null);
+        public IState To(IState to) => To(to,null);
 
         public IState To(IState to, params Func<bool>[] conditions)
         {
             _transitions.Add(conditions == null ? new Transition(to) : new Transition(to, conditions));
             return to;
         }
+
+
+        public IState OrTo(IState to, params Func<bool>[] conditions)
+        {
+            _transitions.Add(conditions == null ? new Transition(to) : new Transition(to, conditions));
+            return this;
+        }
+
         public IState GetTransitionState()
         {
             foreach (Transition t in _transitions) if (t.CheckTransition()) return t.State;
             return null;
         }
+        public bool Equals(FiniteState other)
+        {
+            return string.Equals(Name, other.Name);
+        }
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            return Equals((FiniteState)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Name.GetHashCode();
+        }
 
         protected virtual void Start() { }
         protected virtual void Update() { }
         protected virtual void End() { }
+
     }
 
     public class HierarchicalFiniteState : FiniteState

@@ -41,7 +41,7 @@
   <ItemGroup>
     <Compile Include="ExtendState.cs" />
     <Compile Include="FiniteState.cs" />
-    <Compile Include="FiniteStateMachine.cs" />
+    <Compile Include="FSM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transition.cs" />
   </ItemGroup>

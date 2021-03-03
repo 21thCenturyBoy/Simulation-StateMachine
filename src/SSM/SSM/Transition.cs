@@ -15,6 +15,11 @@ namespace SSM
             State = state;
             _tsConditions = new List<Func<bool>>(conditions);
         }
+        public Transition(IState state, List<Func<bool>> conditions)
+        {
+            State = state;
+            _tsConditions = new List<Func<bool>>(conditions);
+        }
 
         public bool CheckTransition()
         {

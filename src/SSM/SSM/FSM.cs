@@ -22,26 +22,7 @@ namespace SSM
         public IState To(IState from, IState to) { from.To(to); return to; }
 
         public IState To(IState from, IState to, Func<bool> condition) { from.To(to, condition); return to; }
-
-        public int BatchAddState(Dictionary<FiniteState, Func<bool>> batchsData)
-        {
-            int counter = 0;
-            //           b's condition        a's condition
-            //eg:    a---------------->b---------------->a
-            foreach (FiniteState a in batchsData.Keys)
-            {
-                foreach (KeyValuePair<FiniteState, Func<bool>> conditionBatchse in batchsData)
-                {
-                    var b = conditionBatchse.Key;
-                    if (a.Equals(b)) break;
-
-                    a.To(b, conditionBatchse.Value);
-                    counter++;
-                }
-            }
-            return counter;
-        }
-
+        
         public void SetState(IState state)
         {
             _currentState?.Exit();

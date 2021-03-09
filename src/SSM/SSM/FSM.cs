@@ -14,7 +14,6 @@ namespace SSM
 
     public class FSM : IStateMachine
     {
-
         protected IState _currentState;
         public IState CurrentState { get => _currentState; }
         public IState To(IState from, IState to) { from.To(to); return to; }

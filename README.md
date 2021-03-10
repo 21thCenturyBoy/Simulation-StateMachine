@@ -36,7 +36,8 @@ NPC角色进入闲置状态5秒后，进入巡逻状态。在巡逻状态中受�
         TimerFS flee = new TimerFS("flee", time5s);
         FiniteState patrol = new FiniteState("patrol", PatrolonEnter, PatrolOnTick, PatrolonExit);
 
-        idle.To(flee, idle.Finished).To(patrol, GetDanger);//GetDanger为委托
+		//设置转换条件
+		idle.To(patrol, idle.Finished).To(flee, GetDanger).To(idle,flee.Finished);//GetDanger为委托
         
         npcFsm.SetState(idle);//设置初始状态
 ```
@@ -46,7 +47,9 @@ NPC角色进入闲置状态5秒后，进入巡逻状态。在巡逻状态中受�
       fsm.Tick();
 ```
 
+*补充:*
 
+TimerFS类为扩展的**计时时间状态**类。通过**计时时间状态**对象的Finished()可以使用判定是否计时完成。
 
 #### 二、实现仿真部件红外灯的状态机
 
@@ -54,11 +57,52 @@ NPC角色进入闲置状态5秒后，进入巡逻状态。在巡逻状态中受�
 
 红外灯包含3个状态，灭、正常闪烁、红外闪烁。
 
-...
+```c#
+     //构造状态机
+     FSM lightflashfsm = new FSM();
 
+     //创建时间块
+     TimeChunk time = new TimeChunk(GetDeltatime, 1000);
 
+     //创建状态s
+     FiniteState light = new TimerTaskFS("light", time, () => { _lightflag = !_lightflag;}, () => { _lightflag = true; },
+         () =>
+         {
+             if (_lightflag) SendSignal(LightType.NormalLight);
+             else SendSignal(LightType.Dark);
+         }, () => { _lightflag = true; });
+     FiniteState redlight = new TimerTaskFS("redlight", time, () => { _lightflag = !_lightflag; }, () => { _lightflag = true; },
+         () =>
+         {
+             if (_lightflag) SendSignal(LightType.RedLight);
+             else SendSignal(LightType.Dark);
+         }, () => { _lightflag = true; });
+     FiniteState dark = new FiniteState("dark", onTick: () => SendSignal(LightType.Dark));
 
+     //设置转换条件
+     redlight.OrTo(dark, () => GetComDataSwitch(0)).OrTo(light, () => GetComDataSwitch(1));
+     light.OrTo(redlight, () => GetComDataSwitch(2)).OrTo(dark, () => GetComDataSwitch(0));
+     dark.OrTo(light, () => GetComDataSwitch(1)).OrTo(redlight, () => GetComDataSwitch(2));
 
+     lightflashfsm.SetState(dark);
+```
+
+部分定义：
+
+```c#
+        private bool _lightflag;//灯光闪烁标志
+        public  bool GetComDataSwitch(int val) => InputManager.Instance.Data.ComDataSwitch == val;//判断当前数据是否满足转换条件
+```
+
+每帧定时更新状态机。
+
+```c#
+      fsm.Tick();
+```
+
+*补充:*
+
+TimerTaskFS类为扩展的**定时任务状态**类。**定时任务状态**会在状态运行期间，定时执行传入委托。
 
 
 
@@ -70,7 +114,7 @@ NPC角色进入闲置状态5秒后，进入巡逻状态。在巡逻状态中受�
 
 ### 使用状态图构建有限状态机
 
-有限状态机的局限性：
+##### 有限状态机的局限性：
 
 1、状态机跳转条件一旦不满足，就会卡在某一个状态。（状态机会卡主）
 
@@ -80,17 +124,13 @@ NPC角色进入闲置状态5秒后，进入巡逻状态。在巡逻状态中受�
 
 4、设计状态机的结构很复杂，需要合理分割和逻辑跳转
 
-
-
-什么是状态图:
+##### 什么是状态图:
 
 是一种类似有向完全图的数据结构，即包含n个状态点和n(n-1)个弧的有向图。可参考Unity的Animator面板的状态机图。状态点内包含状态和此状态的输入参数的键值。
 
 ![pic3](diagrams/pic4.PNG)
 
-
-
-使用状态图构建有限状态机：
+##### 使用状态图构建有限状态机：
 
 1、因为所有情况都考虑了，定义跳转条件正确的话，不会存在卡主的情况。
 
@@ -98,13 +138,9 @@ NPC角色进入闲置状态5秒后，进入巡逻状态。在巡逻状态中受�
 
 3、构建大型有限状态机代码量更少，方便维护。
 
-使用状态图构建有限状态机的局限性：
+4、由于所有状态的转变情况都考虑了，性能开销变大。
 
-1、由于所有状态的转变情况都考虑了，性能开销变大。
-
-
-
-**注意：当状态太多时，需考虑当前状态机的结构是否合理。**
+#### 实现一个仿真部件的状态机：
 
 #### 实现一个仿真产品部件的状态机
 

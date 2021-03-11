@@ -19,7 +19,7 @@ namespace SSM
         public IState To(IState from, IState to) { from.To(to); return to; }
 
         public IState To(IState from, IState to, Func<bool> condition) { from.To(to, condition); return to; }
-        
+
         public void SetState(IState state)
         {
             _currentState?.Exit();
@@ -29,19 +29,10 @@ namespace SSM
 
         public virtual void Tick()
         {
-            _currentState.Tick();
-            IState to = _currentState.GetTransitionState();
-            if (to != null) SetState(to);
-        }
-    }
-    public class HFSM : FSM
-    {
-        public override void Tick()
-        {
-            HierarchicalFiniteState current = (_currentState as HierarchicalFiniteState)?.GetFinalEntryState();
-            if (current != null) SetState(_currentState);
-            _currentState.Tick();
-            IState to = _currentState.GetTransitionState();
+            IState entry = _currentState?.GetFinalEntryState();
+            if (entry != null)SetState(entry);
+            _currentState?.Tick();
+            IState to = _currentState?.GetTransitionState();
             if (to != null) SetState(to);
         }
     }

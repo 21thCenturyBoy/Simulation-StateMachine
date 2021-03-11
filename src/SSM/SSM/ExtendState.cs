@@ -13,7 +13,7 @@ namespace SSM
             Time = time;
         }
     }
-    public class TimerTaskFS : FiniteState
+    public class TimerTaskFS : HierarchicalFS
     {
         private float _time = 0;
         private float _timer = 0;
@@ -69,7 +69,7 @@ namespace SSM
         public bool Finished() => _counter == 0 && !_loopflag;
     }
 
-    public class TimerFS : FiniteState
+    public class TimerFS : HierarchicalFS
     {
         private float _time = 0;
         private float _timer = 0;

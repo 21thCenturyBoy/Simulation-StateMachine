@@ -58,9 +58,10 @@ namespace SSM
         public bool isTagPairListEquals(List<TagPair> otherList, out List<TagPair> donthave)
         {
             donthave = new List<TagPair>();
+            if(_tagPairLsit==null) return  false;
             foreach (TagPair pair in _tagPairLsit)
             {
-                if (!otherList.Contains(pair)) donthave.Add(pair);
+                if (otherList == null|| !otherList.Contains(pair)) donthave.Add(pair);
             }
             return donthave.Count == 0;
         }
@@ -94,6 +95,7 @@ namespace SSM
         {
             foreach (StatePoint point in StatePointLsit)
             {
+                if(point.TagPairLsit==null)continue;
                 foreach (TagPair pair in point.TagPairLsit)
                 {
                     if (!condDictionary.ContainsKey(pair)) return false;
@@ -139,7 +141,7 @@ namespace SSM
                 for (int j = 0; j < CurrentPointCount; j++)
                 {
                     if (i == j) continue;//自身状态==>自身状态
-
+                    if(StateMatrix[j, i].Info._condiFuncList?.ToArray().Length==0)continue;
                     StatePointLsit[i].State.To(StatePointLsit[j].State, StateMatrix[j, i].Info._condiFuncList?.ToArray());
                     cou++;
                 }

@@ -22,7 +22,7 @@ namespace SSM
         private bool _loopflag = true;
         private Func<float> onUpdateTime;
         private Action _task;
-
+        public float Timer => _timer;
         public TimerTaskFS(TimeChunk timeChunk, Action task, Action onTick) : this(task.Method.Name, timeChunk, task, null, onTick, null) { }
         public TimerTaskFS(TimeChunk timeChunk, Action task, Action onEnter, Action onExit) : this(task.Method.Name, timeChunk, task, onEnter, null, onExit) { }
         public TimerTaskFS(TimeChunk timeChunk, Action task, Action onEnter, Action onTick, Action onExit) : this(task.Method.Name, timeChunk, task, onEnter, onTick, onExit) { }
@@ -74,6 +74,7 @@ namespace SSM
         private float _time = 0;
         private float _timer = 0;
         private Func<float> onUpdateTime;
+        public float Timer => _timer;
         public TimerFS(string name, TimeChunk timeChunk) : this(name, timeChunk, null) { }
         public TimerFS(string name, TimeChunk timeChunk, Action onTick) : this(name, timeChunk, null, onTick, null) { }
         public TimerFS(string name, TimeChunk timeChunk, Action onEnter, Action onExit) : this(name, timeChunk, onEnter, null, onExit) { }

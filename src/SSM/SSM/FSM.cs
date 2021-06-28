@@ -2,6 +2,9 @@
 
 namespace SSM
 {
+    /// <summary>
+    /// 状态机接口
+    /// </summary>
     public interface IStateMachine
     {
         IState To(IState from, IState to);
@@ -11,9 +14,16 @@ namespace SSM
         void Tick();
     }
 
-
+    /// <summary>
+    /// 有限状态机
+    /// </summary>
     public class FSM : IStateMachine
     {
+        /// <summary>
+        /// 状态改变事件
+        /// </summary>
+        public event Action<IState, IState> StateChangeEvent;
+
         protected IState _currentState;
         public IState CurrentState { get => _currentState; }
         public IState To(IState from, IState to) { from.To(to); return to; }
@@ -30,10 +40,19 @@ namespace SSM
         public virtual void Tick()
         {
             IState entry = _currentState?.GetFinalEntryState();
-            if (entry != null)SetState(entry);
+            if (entry != null) SetState(entry);
             _currentState?.Tick();
             IState to = _currentState?.GetTransitionState();
-            if (to != null) SetState(to);
+            if (to != null)
+            {
+                OnStateChangeEvent(_currentState, to);
+                SetState(to);
+            }
+        }
+
+        protected virtual void OnStateChangeEvent(IState arg1, IState arg2)
+        {
+            StateChangeEvent?.Invoke(arg1, arg2);
         }
     }
 }

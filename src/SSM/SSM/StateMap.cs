@@ -41,6 +41,9 @@ namespace SSM
         }
     }
 
+    /// <summary>
+    /// 状态点
+    /// </summary>
     public class StatePoint
     {
         public FiniteState State;
@@ -131,7 +134,10 @@ namespace SSM
             }
             return true;
         }
-
+        /// <summary>
+        /// 创建有限状态机的状态
+        /// </summary>
+        /// <returns></returns>
         public int CreateStateFSM()
         {
             List<FiniteState> states = new List<FiniteState>();
@@ -150,10 +156,22 @@ namespace SSM
             return cou;
         }
     }
-
+    /// <summary>
+    /// 条件标签
+    /// </summary>
     [Serializable]
-    public struct TagPair : IEqualityComparer, IEqualityComparer<TagPair>
+    public struct TagPair : IEqualityComparer, IEqualityComparer<TagPair>,IEquatable<TagPair>
     {
+        public static bool operator ==(TagPair left, TagPair right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(TagPair left, TagPair right)
+        {
+            return !left.Equals(right);
+        }
+
         private int key;
         private int value;
 
@@ -164,7 +182,6 @@ namespace SSM
 
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj)) return false;
             return obj is TagPair other && Equals(other);
         }
 

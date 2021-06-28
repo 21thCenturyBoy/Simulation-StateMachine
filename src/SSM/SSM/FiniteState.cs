@@ -1,8 +1,11 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 
 namespace SSM
 {
+    /// <summary>
+    /// çŠ¶æ€æœºå¼‚å¸¸
+    /// </summary>
     public class FiniteStateException : Exception
     {
         public enum FiniteStateExceptionType
@@ -105,18 +108,17 @@ namespace SSM
 
     public class HierarchicalFS : FiniteState
     {
-        //Save Parents±£´æ¸¸½Úµã
+        //Save Parentsä¿å­˜çˆ¶èŠ‚ç‚¹
         protected HierarchicalFS parent;
         protected HierarchicalFS entryState;
         public void AddChildren(params HierarchicalFS[] children)
         {
             //if (children == null) throw new FiniteStateException(FiniteStateException.FiniteStateExceptionType.AddChildrenFail);
-
-             entryState = children[0];
+            entryState = children[0];
             foreach (HierarchicalFS child in children) child.AddParent(this);
         }
         public void AddParent(HierarchicalFS parentNoed) { parent = parentNoed; }
-        //ÉèÖÃ½øÈë½Úµã
+        //è®¾ç½®è¿›å…¥èŠ‚ç‚¹
         public void SetEntryState(HierarchicalFS hfsmState) { entryState = hfsmState; }
 
         public HierarchicalFS() { onEnter = Start; onTick = Update; onExit = End; Name = "HierarchicalFS"; }

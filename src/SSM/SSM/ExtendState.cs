@@ -2,6 +2,9 @@
 
 namespace SSM
 {
+    /// <summary>
+    /// 时间块
+    /// </summary>
     public struct TimeChunk
     {
         public float Time;
@@ -13,6 +16,9 @@ namespace SSM
             Time = time;
         }
     }
+    /// <summary>
+    /// 计时周期任务状态
+    /// </summary>
     public class TimerTaskFS : HierarchicalFS
     {
         private float _time = 0;
@@ -23,12 +29,20 @@ namespace SSM
         private Func<float> onUpdateTime;
         private Action _task;
         public float Timer => _timer;
+        public TimerTaskFS(TimeChunk timeChunk, Action task) : this(task.Method.Name, timeChunk, task, null, null, null) { }
+        public TimerTaskFS(TimeChunk timeChunk, Action task, int count) : this(task.Method.Name, timeChunk, task, null, null, null, count) { }
         public TimerTaskFS(TimeChunk timeChunk, Action task, Action onTick) : this(task.Method.Name, timeChunk, task, null, onTick, null) { }
+        public TimerTaskFS(TimeChunk timeChunk, Action task, Action onTick, int count) : this(task.Method.Name, timeChunk, task, null, onTick, null, count) { }
         public TimerTaskFS(TimeChunk timeChunk, Action task, Action onEnter, Action onExit) : this(task.Method.Name, timeChunk, task, onEnter, null, onExit) { }
+        public TimerTaskFS(TimeChunk timeChunk, Action task, Action onEnter, Action onExit, int count) : this(task.Method.Name, timeChunk, task, onEnter, null, onExit, count) { }
         public TimerTaskFS(TimeChunk timeChunk, Action task, Action onEnter, Action onTick, Action onExit) : this(task.Method.Name, timeChunk, task, onEnter, onTick, onExit) { }
         public TimerTaskFS(TimeChunk timeChunk, Action task, Action onEnter, Action onTick, Action onExit, int count = 0) : this(task.Method.Name, timeChunk, task, onEnter, onTick, onExit, count) { }
+        public TimerTaskFS(string name, TimeChunk timeChunk, Action task) : this(name, timeChunk, task, null, null, null) { }
+        public TimerTaskFS(string name, TimeChunk timeChunk, Action task, int count) : this(name, timeChunk, task, null, null, null, count) { }
         public TimerTaskFS(string name, TimeChunk timeChunk, Action task, Action onTick) : this(name, timeChunk, task, null, onTick, null) { }
+        public TimerTaskFS(string name, TimeChunk timeChunk, Action task, Action onTick, int count) : this(name, timeChunk, task, null, onTick, null, count) { }
         public TimerTaskFS(string name, TimeChunk timeChunk, Action task, Action onEnter, Action onExit) : this(name, timeChunk, task, onEnter, null, onExit) { }
+        public TimerTaskFS(string name, TimeChunk timeChunk, Action task, Action onEnter, Action onExit, int count) : this(name, timeChunk, task, onEnter, null, onExit, count) { }
         public TimerTaskFS(string name, TimeChunk timeChunk, Action task, Action onEnter, Action onTick, Action onExit) : this(name, timeChunk, task, onEnter, onTick, onExit, 0) { }
         public TimerTaskFS(string name, TimeChunk timeChunk, Action task, Action onEnter, Action onTick, Action onExit, int count = 0)
         {
@@ -68,7 +82,9 @@ namespace SSM
         public int GetCounter() => _counter;
         public bool Finished() => _counter == 0 && !_loopflag;
     }
-
+    /// <summary>
+    /// 计时任务状态
+    /// </summary>
     public class TimerFS : HierarchicalFS
     {
         private float _time = 0;

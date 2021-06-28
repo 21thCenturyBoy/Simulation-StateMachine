@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace SSM
 {
+    /// <summary>
+    /// 转换条件
+    /// </summary>
     public class Transition
     {
         public IState State { get; private set; }

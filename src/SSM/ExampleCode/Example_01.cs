@@ -1,31 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SSM;
+﻿using SSM;
+using System;
 
 namespace ExampleCode
 {
-    public class Example_01 : IBehaviour
+    public class Example_01 : FSMBehaviour
     {
         public FSM LampFsm;
 
-        private float _deltaTime;
-
         public bool IsLight = false;//是否亮
-        public bool IsPower = true;//是否通电
+        public bool IsPower = false;//是否通电
 
-        public void Start()
+        public override void Start()
         {
+            base.Start();
+
             InitFSM();
+            Console.WriteLine("请输入命令:1");
         }
 
-        public void Update(float deltatime)
+        public override void Update(float deltatime)
         {
-            _deltaTime = deltatime;
+            base.Update(deltatime);
 
             LampFsm.Tick();
+        }
+        public override void GetInput(string inputOrder)
+        {
+            base.GetInput(inputOrder);
+
+            if (inputOrder == "1") IsPower = true;
         }
 
         private void InitFSM()
@@ -33,11 +36,11 @@ namespace ExampleCode
             LampFsm = new FSM();
 
             FiniteState idelState = new FiniteState("未通电状态");
-            TimerFS brightState = new TimerFS("明亮状态", new TimeChunk(() => _deltaTime, 5000));
-            TimerTaskFS flashState = new TimerTaskFS("闪烁状态", new TimeChunk(() => _deltaTime, 1000), () => { IsLight = !IsLight; },3);
+            TimerFS brightState = new TimerFS("明亮状态", new TimeChunk(GetDeltaTime, 5000));
+            TimerTaskFS flashState = new TimerTaskFS("闪烁状态", new TimeChunk(GetDeltaTime, 1000), () => { IsLight = !IsLight; }, 3);
             FiniteState blowoutState = new FiniteState("灯丝烧断状态");
 
-            idelState.To(brightState, ()=> IsPower).To(flashState,brightState.Finished).To(blowoutState,flashState.Finished);
+            idelState.To(brightState, () => IsPower).To(flashState, brightState.Finished).To(blowoutState, flashState.Finished);
 
             LampFsm.SetState(idelState);
 
@@ -48,5 +51,8 @@ namespace ExampleCode
         {
             Console.WriteLine(arg1.Name + "-->" + arg2.Name);
         }
+
+
     }
+
 }

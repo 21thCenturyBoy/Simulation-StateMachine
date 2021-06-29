@@ -111,9 +111,10 @@ namespace SSM
         //Save Parents保存父节点
         protected HierarchicalFS parent;
         protected HierarchicalFS entryState;
+
         public void AddChildren(params HierarchicalFS[] children)
         {
-            //if (children == null) throw new FiniteStateException(FiniteStateException.FiniteStateExceptionType.AddChildrenFail);
+            if (children == null) throw new FiniteStateException(FiniteStateException.FiniteStateExceptionType.AddChildrenFail);
             entryState = children[0];
             foreach (HierarchicalFS child in children) child.AddParent(this);
         }

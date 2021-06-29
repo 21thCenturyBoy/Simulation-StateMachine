@@ -33,6 +33,7 @@ namespace SSM
         public void SetState(IState state)
         {
             _currentState?.Exit();
+            OnStateChangeEvent(_currentState, state);
             _currentState = state;
             _currentState.Enter();
         }
@@ -43,11 +44,7 @@ namespace SSM
             if (entry != null) SetState(entry);
             _currentState?.Tick();
             IState to = _currentState?.GetTransitionState();
-            if (to != null)
-            {
-                OnStateChangeEvent(_currentState, to);
-                SetState(to);
-            }
+            if (to != null) SetState(to);
         }
 
         protected virtual void OnStateChangeEvent(IState arg1, IState arg2)

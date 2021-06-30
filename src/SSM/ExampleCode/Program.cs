@@ -42,6 +42,10 @@ namespace ExampleCode
             //exampleBehaviour = new Example_02();
             //exampleBehaviour.Start();
 
+            ////TODO 取消注释运行---展示了一使用状态图构建状态机的例子
+            exampleBehaviour = new Example_03();
+            exampleBehaviour.Start();
+
             Task task = new Task(OnUpdate);
             task.Start();
 

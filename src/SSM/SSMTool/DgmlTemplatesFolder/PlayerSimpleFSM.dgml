@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph GraphDirection="LeftToRight" Layout="ForceDirected" ZoomLevel="-1" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="在地面状态" Bounds="1756.33852589485,4722.4243129952,68,25.2399999999998" Label="奔跑状态" />
+    <Node Id="在地面状态1" Bounds="1736.33852589485,4682.4243129952,206.0001,140.48" Group="Expanded" Label="在地面状态" UseManualLocation="True" />
+    <Node Id="站立状态" Bounds="1854.33862589485,4722.4243129952,68,25.2399999999998" Label="站立状态" />
+    <Node Id="行走状态" Bounds="1805.31234703539,4777.6643129952,68,25.2399999999998" Label="行走状态" />
+    <Node Id="跳跃状态" Bounds="1638.33842589485,4740.04431198439,68,25.2399999999907" />
+  </Nodes>
+  <Links>
+    <Link Source="在地面状态" Target="站立状态" Bounds="1824.33850097656,4738.04443359375,21.0001220703125,0" />
+    <Link Source="在地面状态" Target="行走状态" Bounds="1804.67211914063,4747.66455078125,20.6153564453125,23.275390625" />
+    <Link Source="在地面状态1" Target="在地面状态" Category="Contains" />
+    <Link Source="在地面状态1" Target="站立状态" Category="Contains" Bounds="35.2999992370606,5.78267354527597,90.6158424067008,5.38358921440464" />
+    <Link Source="在地面状态1" Target="行走状态" Category="Contains" />
+    <Link Source="在地面状态1" Target="跳跃状态" Bounds="1715.33837890625,4749.66455078125,21.0001220703125,0" />
+    <Link Source="站立状态" Target="在地面状态" Bounds="1833.33850097656,4732.04443359375,21.0001220703125,0" />
+    <Link Source="站立状态" Target="行走状态" Bounds="1863.59558105469,4747.66455078125,20.3876953125,23.30126953125" />
+    <Link Source="行走状态" Target="在地面状态" Bounds="1802.62805175781,4754.400390625,20.6068115234375,23.26416015625" />
+    <Link Source="行走状态" Target="站立状态" Bounds="1849.49157714844,4754.4755859375,20.68798828125,23.18896484375" />
+    <Link Source="跳跃状态" Target="在地面状态1" Bounds="1706.33837890625,4755.66455078125,21.0001220703125,0" />
+  </Links>
+  <Categories>
+    <Category Id="Contains" Label="包含" Description="链接的源是否包含目标对象" CanBeDataDriven="False" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="包含者" IsContainment="True" OutgoingActionLabel="包含" />
+  </Categories>
+  <Properties>
+    <Property Id="Bounds" DataType="System.Windows.Rect" />
+    <Property Id="CanBeDataDriven" Label="CanBeDataDriven" Description="CanBeDataDriven" DataType="System.Boolean" />
+    <Property Id="CanLinkedNodesBeDataDriven" Label="CanLinkedNodesBeDataDriven" Description="CanLinkedNodesBeDataDriven" DataType="System.Boolean" />
+    <Property Id="Expression" DataType="System.String" />
+    <Property Id="GraphDirection" DataType="Microsoft.VisualStudio.Diagrams.Layout.LayoutOrientation" />
+    <Property Id="Group" Label="组" Description="将节点显示为组" DataType="Microsoft.VisualStudio.GraphModel.GraphGroupStyle" />
+    <Property Id="GroupLabel" DataType="System.String" />
+    <Property Id="IncomingActionLabel" Label="IncomingActionLabel" Description="IncomingActionLabel" DataType="System.String" />
+    <Property Id="IsContainment" DataType="System.Boolean" />
+    <Property Id="IsEnabled" DataType="System.Boolean" />
+    <Property Id="Label" Label="标签" Description="可批注对象的可显示标签" DataType="System.String" />
+    <Property Id="Layout" DataType="System.String" />
+    <Property Id="OutgoingActionLabel" Label="OutgoingActionLabel" Description="OutgoingActionLabel" DataType="System.String" />
+    <Property Id="TargetType" DataType="System.Type" />
+    <Property Id="UseManualLocation" DataType="System.Boolean" />
+    <Property Id="Value" DataType="System.String" />
+    <Property Id="ValueLabel" DataType="System.String" />
+    <Property Id="ZoomLevel" DataType="System.String" />
+  </Properties>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="注释" ValueLabel="包含注释">
+      <Condition Expression="HasCategory('Comment')" />
+      <Setter Property="Background" Value="#FFFFFACD" />
+      <Setter Property="Stroke" Value="#FFE5C365" />
+      <Setter Property="StrokeThickness" Value="1" />
+      <Setter Property="NodeRadius" Value="2" />
+      <Setter Property="MaxWidth" Value="250" />
+    </Style>
+  </Styles>
+</DirectedGraph>

@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSM", "SSM\SSM.csproj", "{2
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleCode", "ExampleCode\ExampleCode.csproj", "{9A8D107F-7C3C-49BC-AE15-7CC48FC6E48F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerateSSMTool", "GenerateSSMTool\GenerateSSMTool.csproj", "{5BCC8058-8413-416E-A1E3-FEE6C9AD4BE4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSMTool", "SSMTool\SSMTool.csproj", "{D32DC848-BA71-42BE-9681-5802D6BF6AF8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{9A8D107F-7C3C-49BC-AE15-7CC48FC6E48F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A8D107F-7C3C-49BC-AE15-7CC48FC6E48F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A8D107F-7C3C-49BC-AE15-7CC48FC6E48F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5BCC8058-8413-416E-A1E3-FEE6C9AD4BE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5BCC8058-8413-416E-A1E3-FEE6C9AD4BE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5BCC8058-8413-416E-A1E3-FEE6C9AD4BE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5BCC8058-8413-416E-A1E3-FEE6C9AD4BE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D32DC848-BA71-42BE-9681-5802D6BF6AF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D32DC848-BA71-42BE-9681-5802D6BF6AF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D32DC848-BA71-42BE-9681-5802D6BF6AF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D32DC848-BA71-42BE-9681-5802D6BF6AF8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

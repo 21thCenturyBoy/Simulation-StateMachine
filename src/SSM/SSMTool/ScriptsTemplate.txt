@@ -1,0 +1,30 @@
+﻿using SSM;
+using System;
+using System.Collections.Generic;
+
+public class <#FSMContainerClassType#> 
+{
+    public <#FSMClassType#> <#FSMName#>;
+
+    private void InitFSM()
+    {
+        <#FSMName#> = new <#FSMClassType#>();
+
+        <#FiniteStateConstructor#>
+
+        <#FiniteStateLink#>
+
+        <#FiniteStateSetInit#>
+
+        <#FSMName#>.StateChangeEvent += <#FSMName#>_StateChangeEvent;
+    }
+
+    private void <#FSMName#>_StateChangeEvent(IState arg1, IState arg2)
+    {
+
+    }
+
+    <#FiniteStateConditionMethod#>
+}
+
+

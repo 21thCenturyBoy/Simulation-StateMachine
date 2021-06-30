@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph GraphDirection="TopToBottom" Layout="Sugiyama" ZoomLevel="-1" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="BlowoutState" Bounds="0,220.96,100.313333333333,25.24" Label="blowout State" />
+    <Node Id="BrightState" Bounds="6.23833333333327,110.48,87.8366666666667,25.24" Label="bright State" />
+    <Node Id="FlashState" Bounds="10.2616666666666,165.72,79.79,25.24" Label="flash State" />
+    <Node Id="IdelState" Bounds="13.2899999999999,55.24,73.7333333333333,25.24" Label="idel State" />
+  </Nodes>
+  <Links>
+    <Link Source="BrightState" Target="FlashState" Bounds="50.1566638187243,135.71999899292,1.77890822072868E-06,21.0001" />
+    <Link Source="FlashState" Target="BlowoutState" Bounds="50.156665802002,190.960006713867,0,21" />
+    <Link Source="IdelState" Target="BrightState" Bounds="50.1566630563387,80.4798989929199,1.77890822783411E-06,21.0001000000001" />
+  </Links>
+  <Properties>
+    <Property Id="Bounds" DataType="System.Windows.Rect" />
+    <Property Id="Expression" DataType="System.String" />
+    <Property Id="GraphDirection" DataType="Microsoft.VisualStudio.Diagrams.Layout.LayoutOrientation" />
+    <Property Id="GroupLabel" DataType="System.String" />
+    <Property Id="IsEnabled" DataType="System.Boolean" />
+    <Property Id="Label" Label="标签" Description="可批注对象的可显示标签" DataType="System.String" />
+    <Property Id="Layout" DataType="System.String" />
+    <Property Id="TargetType" DataType="System.Type" />
+    <Property Id="Value" DataType="System.String" />
+    <Property Id="ValueLabel" DataType="System.String" />
+    <Property Id="ZoomLevel" DataType="System.String" />
+  </Properties>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="类别 1" ValueLabel="具有类别">
+      <Condition Expression="HasCategory('Category1')" />
+      <Setter Property="Background" Value="#FFE51400" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="注释" ValueLabel="包含注释">
+      <Condition Expression="HasCategory('Comment')" />
+      <Setter Property="Background" Value="#FFFFFACD" />
+      <Setter Property="Stroke" Value="#FFE5C365" />
+      <Setter Property="StrokeThickness" Value="1" />
+      <Setter Property="NodeRadius" Value="2" />
+      <Setter Property="MaxWidth" Value="250" />
+    </Style>
+  </Styles>
+</DirectedGraph>

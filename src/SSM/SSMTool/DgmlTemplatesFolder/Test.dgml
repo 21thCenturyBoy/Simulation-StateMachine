@@ -1,26 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <DirectedGraph xmlns="http://schemas.microsoft.com/vs/2009/dgml">
   <Nodes>
-    <Node Id="NewGroup" Bounds="-33.9064489364624,-3.97087373930022,124.95,140.4803" Group="Expanded" UseManualLocation="True" />
-    <Node Id="NewNode" Bounds="-10.388115603129,36.0292262606998,77.9133333333333,25.24" />
-    <Node Id="NewNode2" Bounds="-13.9064489364624,91.2693262606998,84.95,25.24" />
+    <Node Id="NewGroup" Bounds="-33.9064503669739,-3.93934898097976,124.95,140.48" Group="Expanded" UseManualLocation="True" />
+    <Node Id="NewNode" Category="Category1" Bounds="-10.4489170336405,36.1493510190202,77.9133333333333,25.24" />
+    <Node Id="NewNode2" Bounds="-13.9064503669739,91.3006510190203,84.95,25.24" />
   </Nodes>
   <Links>
     <Link Source="NewGroup" Target="NewNode" Category="Contains" Bounds="38.9566650390625,-29.9999961853027,6.31000137329102,29.9999961853027" />
     <Link Source="NewGroup" Target="NewNode2" Category="Contains" />
-    <Link Source="NewNode" Target="NewNode2" Bounds="28.5685520172119,61.2692756652832,0,21.0000038146973" />
+    <Link Source="NewNode" Target="NewNode2" Category="延时" Bounds="28.5685501098633,61.300651550293,0,21" />
   </Links>
   <Categories>
+    <Category Id="Category1" Label="类别 1" Background="#FFE51400" IsTag="True" />
     <Category Id="Contains" Label="包含" Description="链接的源是否包含目标对象" CanBeDataDriven="False" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="包含者" IsContainment="True" OutgoingActionLabel="包含" />
+    <Category Id="延时" Label="延时" IsTag="True" />
   </Categories>
   <Properties>
+    <Property Id="Background" Label="背景" Description="背景色" DataType="System.Windows.Media.Brush" />
     <Property Id="Bounds" DataType="System.Windows.Rect" />
     <Property Id="CanBeDataDriven" Label="CanBeDataDriven" Description="CanBeDataDriven" DataType="System.Boolean" />
     <Property Id="CanLinkedNodesBeDataDriven" Label="CanLinkedNodesBeDataDriven" Description="CanLinkedNodesBeDataDriven" DataType="System.Boolean" />
+    <Property Id="Expression" DataType="System.String" />
     <Property Id="Group" Label="组" Description="将节点显示为组" DataType="Microsoft.VisualStudio.GraphModel.GraphGroupStyle" />
+    <Property Id="GroupLabel" DataType="System.String" />
     <Property Id="IncomingActionLabel" Label="IncomingActionLabel" Description="IncomingActionLabel" DataType="System.String" />
     <Property Id="IsContainment" DataType="System.Boolean" />
+    <Property Id="IsEnabled" DataType="System.Boolean" />
+    <Property Id="IsTag" DataType="System.Boolean" />
     <Property Id="OutgoingActionLabel" Label="OutgoingActionLabel" Description="OutgoingActionLabel" DataType="System.String" />
+    <Property Id="TargetType" DataType="System.Type" />
     <Property Id="UseManualLocation" DataType="System.Boolean" />
+    <Property Id="Value" DataType="System.String" />
+    <Property Id="ValueLabel" DataType="System.String" />
   </Properties>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="类别 1" ValueLabel="具有类别">
+      <Condition Expression="HasCategory('Category1')" />
+      <Setter Property="Background" Value="#FFE51400" />
+    </Style>
+  </Styles>
 </DirectedGraph>

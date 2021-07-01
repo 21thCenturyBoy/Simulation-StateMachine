@@ -13,6 +13,7 @@ namespace SSMTool
         {
             SSMToolManager.GenerateCSharpScript();
 
+            Debug.Log("Press any key to exit...");
             Console.ReadLine();
         }
     }

@@ -34,5 +34,19 @@ namespace SSMTool.Model
                 return (DirectedGraph)serializer.Deserialize(file);
             }
         }
+        /// <summary>
+        /// 读取dgml
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public static Node GetNode(this DirectedGraph graph,string NodeID)
+        {
+            if (graph.Nodes == null) return null;
+            for (int i = 0; i < graph.Nodes.Count; i++)
+            {
+                if (graph.Nodes[i].Id.Equals(NodeID)) return graph.Nodes[i];
+            }
+            return null;
+        }
     }
 }

@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Debug.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\CategoryRef.cs" />
     <Compile Include="Model\DirectedGraph.cs" />
@@ -54,13 +55,16 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SSMToolManager.cs" />
+    <Compile Include="StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="DgmlTemplatesFolder\ComplexFSM.dgml" />
+    <None Include="DgmlTemplatesFolder\Graph1.dgml" />
     <None Include="DgmlTemplatesFolder\LampFSM.dgml" />
     <None Include="DgmlTemplatesFolder\PlayerSimpleFSM.dgml" />
     <None Include="DgmlTemplatesFolder\Test.dgml" />
+    <None Include="DgmlTemplatesFolder\Test1.dgml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="GenerateFolder\" />

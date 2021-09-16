@@ -4,7 +4,7 @@
 
 #### 一、实现如下NPC角色的状态机。
 
-![pic1](diagrams\pic1.PNG)
+![pic1](diagrams/pic1.PNG)
 
 NPC角色进入闲置状态5秒后，进入巡逻状态。在巡逻状态中受到伤害，进入逃跑状态。在逃跑5秒后，进入闲置状态。
 
@@ -42,7 +42,7 @@ TimerFS类为扩展的**计时时间状态**类。通过**计时时间状态**�
 
 #### 二、实现仿真部件红外灯的状态机
 
-![pic3](diagrams\pic2.PNG)
+![pic3](diagrams/pic2.PNG)
 
 红外灯包含3个状态，灭、正常闪烁、红外闪烁。当进入闪光状态，需要每隔1s切换灭->亮或亮->灭，当进入红外闪光状态，需要每隔1s切换灭->红外亮或红外亮->灭。
 
@@ -102,7 +102,7 @@ TimerTaskFS类为扩展的**定时任务状态**类。**定时任务状态**会�
 
 玩家控制角色有四种状态，腾空状态、站立状态、奔跑状态、行走状态。站立状态、奔跑状态、行走状态都属于在地面状态，且在地面状态默认为站立状态。
 
-<img src="diagrams\pic6.PNG" alt="pic6" style="zoom: 67%;" />
+![pic3](diagrams/pic6.png)
 
 构建层次状态机代码：
 
@@ -161,7 +161,7 @@ TimerTaskFS类为扩展的**定时任务状态**类。**定时任务状态**会�
 
 是一种类似有向完全图的数据结构，即包含n个状态点和n(n-1)个弧的有向图。可参考Unity的Animator面板的状态机图。状态点内包含状态和此状态的输入参数的键值。
 
-![pic3](diagrams\pic4.PNG)
+![pic3](diagrams/pic4.PNG)
 
 ##### 使用状态图的优势：
 
@@ -183,7 +183,7 @@ TimerTaskFS类为扩展的**定时任务状态**类。**定时任务状态**会�
 
 仿真部件的状态由三个输入参数控制，开关SwitchA（值:1,2,3）、按钮ButtonB（值:true,fasle）、SwitchC（值:1,2）。构成状态以及状态条件：
 
-![pic3](diagrams\pic3.PNG)
+![pic3](diagrams/pic3.PNG)
 
 如：当SwitchA == 1且ButtonB == true且SwitchC==1时进入StateA1BtC1状态...
 
@@ -191,7 +191,7 @@ TimerTaskFS类为扩展的**定时任务状态**类。**定时任务状态**会�
 
 用Unity的Animator画一下状态机各状态的联系：
 
-![pic5](diagrams\pic5.PNG)
+![pic5](diagrams/pic5.PNG)
 
 代码实现:
 
